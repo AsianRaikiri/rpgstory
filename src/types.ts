@@ -44,5 +44,6 @@ export interface characterFile {
         intelligence: number,
         charisma: number
     }
-    learned_abilities: ability[]
+    learned_abilities: ability[],
+    dir: string
 }
