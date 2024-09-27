@@ -2,7 +2,10 @@
   "name": "rpgstory",
   "version": "1.0.0",
   "description": "A simple cli rpg, made for my amusement",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "bin": {
+    "rpgstory": "./dist/index.js"
+  },
   "scripts": {
     "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
