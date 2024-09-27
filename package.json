@@ -27,7 +27,8 @@
   "homepage": "https://github.com/AsianRaikiri/rpgstory#readme",
   "dependencies": {
     "enquirer": "^2.4.1",
-    "figlet": "^1.7.0"
+    "figlet": "^1.7.0",
+    "node-persist": "^4.0.3"
   },
   "devDependencies": {
     "@types/node": "^22.7.3",

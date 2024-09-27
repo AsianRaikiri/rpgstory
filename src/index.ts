@@ -12,14 +12,16 @@ function startingScreen(){
     console.log("This is the starting script text for this rpg game")
 }
 
+const commands: Record<string, any> = {
+    "Create new Character": create_character,
+    "Delete existing Character": delete_character,
+    "List all existing Characters": list_characters,
+    "Help": help
+}
+
 async function main(){
     startingScreen()
-    const commands: Record<string, any> = {
-        "Create new Character": create_character,
-        "Delete existing Character": delete_character,
-        "List all existing Characters": list_characters,
-        "Help": help
-    }
+
     const enquirer = new Enquirer()
     enquirer.prompt([
         {
@@ -29,11 +31,11 @@ async function main(){
             choices: Object.keys(commands)
         },]
     ).then((answers: Record<string, any>) => {
-        const exampleFunction = commands[answers.command];
-        if (exampleFunction) {
-          exampleFunction();
+        const selectedFunction = commands[answers.command];
+        if (selectedFunction) {
+            selectedFunction();
         } else {
-          console.error("Invalid selection");
+            console.error("Invalid selection");
         }    
     })
     
