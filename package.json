@@ -26,7 +26,6 @@
   },
   "homepage": "https://github.com/AsianRaikiri/rpgstory#readme",
   "dependencies": {
-    "commander": "^12.1.0",
     "enquirer": "^2.4.1",
     "figlet": "^1.7.0"
   },
