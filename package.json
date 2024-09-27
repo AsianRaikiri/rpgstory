@@ -4,6 +4,7 @@
   "description": "A simple cli rpg, made for my amusement",
   "main": "index.js",
   "scripts": {
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/AsianRaikiri/rpgstory/issues"
   },
-  "homepage": "https://github.com/AsianRaikiri/rpgstory#readme"
+  "homepage": "https://github.com/AsianRaikiri/rpgstory#readme",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "figlet": "^1.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.3",
+    "typescript": "^5.6.2"
+  }
 }
