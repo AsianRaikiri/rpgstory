@@ -35,6 +35,7 @@ export interface characterFile {
     exp: number, 
     maxHP: number,
     HP: number,
+    free_stat_points: number
     stats: {
         strength: number,
         dexterity: number,

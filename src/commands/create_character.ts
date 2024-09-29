@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import Enquirer from "enquirer"
-import { create_character_class } from "../templates/classes"
+import { create_character_class } from "../assets/classes"
 import { characterClass, characterClassName } from "../types"
 import { CharacterSheet } from "../utils/characterFileManager"
 import path from "path"

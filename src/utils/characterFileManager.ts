@@ -50,13 +50,14 @@ export namespace CharacterSheet {
             exp: 0,
             maxHP: 10,
             HP: 10,
+			free_stat_points: 20,
             stats:{
-                strength: 2,
-                dexterity: 2,
-                constitution: 2, 
-                intelligence: 2,
-                wisdom: 2,
-                charisma: 2
+                strength: 1,
+                dexterity: 1,
+                constitution: 1, 
+                intelligence: 1,
+                wisdom: 1,
+                charisma: 1
             },
             active_abilities: characterClass.base_abilities,
             dir: `${name}-player.json`
