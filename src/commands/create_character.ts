@@ -1,27 +1,12 @@
 #!/usr/bin/env node
 
 import Enquirer from "enquirer"
-import { create_character_class } from "../assets/classes"
+import { create_character_class } from "../content/classes"
 import { characterClass, characterClassName } from "../types"
 import { CharacterSheet } from "../utils/characterFileManager"
 import path from "path"
 
-function create_folder(dir: string){
-    const fs = require("fs");
-    if(!fs.existsSync(dir)){
-        fs.mkdirSync(dir, {recursive:true});
-    }
-}
-
-function create_asset_folders(){
-    var dir = path.resolve(__dirname, '..', 'assets', 'characters');
-    create_folder(dir);
-    dir = path.resolve(__dirname, '..', 'assets', 'storage');
-    create_folder(dir);
-}
-
 export default async function create_character() {
-    create_asset_folders();
     const enquirer = new Enquirer();
     const answers: Record<string, any>  = await enquirer.prompt([
         {

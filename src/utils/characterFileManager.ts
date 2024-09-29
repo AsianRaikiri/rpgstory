@@ -40,6 +40,7 @@ export namespace CharacterSheet {
 	}       
 
 	export async function deleteJson( filePath: string ) {
+		console.log(`This is the link to the file to delete ${path.resolve(ASSET_JSON_STORAGE, filePath)}`)
 		await fs.unlink( path.resolve(ASSET_JSON_STORAGE, filePath) )
 	}
 
@@ -62,25 +63,25 @@ export namespace CharacterSheet {
             active_abilities: characterClass.base_abilities,
             dir: `${name}-player.json`
         }
-        return await makeJson(newCharacter, `${newCharacter.name}-player.json`)
+		await loadCharIntoStorage(newCharacter)
+		return await makeJson(newCharacter, `${newCharacter.name}-player.json`)
     }
 
     export async function deleteCharWithFile( character_name: string ) {
-		const character = await deleteCharFromStorage( character_name )
-
-		if (character)
+		console.log(`This is the link to the player to delete ${path.resolve(ASSET_JSON_STORAGE, character_name)}`)
+		const character = await getCharFromStorage(character_name)
+		const deleted = await deleteCharFromStorage( character )
+		if (deleted)
 			await deleteJson(character.dir)
 		else console.warn("Navi was only deleted from storage")
 	}
 
-	export async function deleteCharFromStorage(character_name: string ): Promise<characterFile | undefined> {
-		const res = await storage.removeItem( character_name )
-		if ( res.removed )
-			return JSON.parse( res.file )
-		else return undefined
+	export async function deleteCharFromStorage(character: characterFile ): Promise<boolean> {
+		const res = await storage.removeItem( `${character.name}-player` )
+		return res.removed
 	}
     export async function loadCharIntoStorage( character: characterFile ) {
-		await storage.setItem( character.name, character)
+		await storage.setItem( `${character.name}-player`, character)
 	}
 
 	export async function saveCharToFile(character: characterFile){
@@ -88,12 +89,12 @@ export namespace CharacterSheet {
 	}
 
 	export async function updateCharStats( character: characterFile ) {
-		await storage.updateItem( character.name, character )
+		await storage.updateItem( `${character.name}-player`, character )
 		await saveCharToFile( character)
 	}
 
 	export async function getCharFromStorage( character_name: string ): Promise<characterFile> {
-		return await storage.getItem( character_name)
+		return await storage.getItem( `${character_name}-player`)
 	}
 
 	export async function getAllLoadedChars(): Promise<characterFile[]> {
