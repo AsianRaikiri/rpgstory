@@ -5,6 +5,7 @@ import list_characters from "./commands/list_characters";
 import create_character from "./commands/create_character";
 import delete_character from "./commands/delete_character";
 import Enquirer from "enquirer";
+import {CharacterSheet} from "./utils/characterFileManager";
 const figlet = require("figlet");
 
 function startingScreen(){
@@ -21,7 +22,10 @@ const commands: Record<string, any> = {
 
 async function main(){
     startingScreen()
-
+    console.time("Loading all Characters")
+    await CharacterSheet.initStorage()
+    console.timeEnd("Loading all Characters")
+    
     const enquirer = new Enquirer()
     enquirer.prompt([
         {

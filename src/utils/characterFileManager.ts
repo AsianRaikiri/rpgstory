@@ -66,42 +66,56 @@ export namespace CharacterSheet {
     }
 
     export async function deleteCharWithFile( character_name: string ) {
-		const character = await deleteNaviFromStorage( character_name )
+		const character = await deleteCharFromStorage( character_name )
 
 		if (character)
 			await deleteJson(character.dir)
 		else console.warn("Navi was only deleted from storage")
 	}
 
-	export async function deleteNaviFromStorage(character_name: string ): Promise<characterFile | undefined> {
-		await storage.init(STORAGE_SETTINGS)
+	export async function deleteCharFromStorage(character_name: string ): Promise<characterFile | undefined> {
 		const res = await storage.removeItem( character_name )
 		if ( res.removed )
 			return JSON.parse( res.file )
 		else return undefined
 	}
-    export async function loadNaviIntoStorage( character: characterFile ) {
-		await storage.init(STORAGE_SETTINGS)
+    export async function loadCharIntoStorage( character: characterFile ) {
 		await storage.setItem( character.name, character)
 	}
 
-	export async function saveNaviFromStorage( character: characterFile ) {
-		await storage.init( STORAGE_SETTINGS )
+	export async function saveCharFromStorage( character: characterFile ) {
 		await storage.setItem( character.name, character)
 	}
 
-	export async function updateNaviStatsInStorage( character: characterFile ) {
-		await storage.init( STORAGE_SETTINGS )
+	export async function updateCharStatsInStorage( character: characterFile ) {
 		await storage.updateItem( character.name, character )
 	}
 
-	export async function getNaviFromStorage( character_name: string ): Promise<characterFile> {
-		await storage.init( STORAGE_SETTINGS )
+	export async function getCharFromStorage( character_name: string ): Promise<characterFile> {
+		initStorage()
 		return await storage.getItem( character_name)
 	}
 
-	export async function getAllLoadedNavis(): Promise<characterFile[]> {
+	export async function getAllLoadedChars(): Promise<characterFile[]> {
 		await storage.init( STORAGE_SETTINGS )
 		return await storage.valuesWithKeyMatch('-player')
+	}
+
+	export async function getAllChars():Promise<Array<string>> {
+		const char_names: Array<string> = [];
+		const existing_chars = await fs.readdir(ASSET_JSON_STORAGE)
+		existing_chars.forEach(elem =>{
+			const char_name = elem.replace("-player.json", "");
+			char_names.push(char_name)
+		})
+		return char_names
+	}
+	export async function initStorage(){
+		await storage.init( STORAGE_SETTINGS )
+		const file_names =  await fs.readdir(ASSET_JSON_STORAGE)
+		file_names.forEach(async file_name => {
+			const char_json: characterFile = await readJson(path.resolve(ASSET_JSON_STORAGE, file_name)) as characterFile
+			await loadCharIntoStorage(char_json)
+		})
 	}
 }
