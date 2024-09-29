@@ -1,11 +1,13 @@
 #! /usr/bin/env node
 
-import help from "./commands/help";
-import list_characters from "./commands/list_characters";
+import base_game_loop from "./commands/start_game";
+import {CharacterSheet} from "./utils/characterFileManager";
 import create_character from "./commands/create_character";
 import delete_character from "./commands/delete_character";
 import Enquirer from "enquirer";
-import {CharacterSheet} from "./utils/characterFileManager";
+import help from "./commands/help";
+import list_characters from "./commands/list_characters";
+
 import path from "path";
 const figlet = require("figlet");
 
@@ -28,6 +30,7 @@ function startingScreen(){
 }
 
 const commands: Record<string, any> = {
+    "Start playing": base_game_loop,
     "Create new Character": create_character,
     "Delete existing Character": delete_character,
     "List all existing Characters": list_characters,
@@ -35,7 +38,7 @@ const commands: Record<string, any> = {
     "Exit": exit
 }
 
-async function exit(){
+export async function exit(){
     process.exit()
 }
 async function main(){
@@ -53,7 +56,7 @@ async function main(){
                 name: "command",
                 message: "What command do you wanna use?",
                 choices: Object.keys(commands)
-            },]
+            }]
         )
         const selectedFunction = commands[answers.command];
         if (selectedFunction) {
