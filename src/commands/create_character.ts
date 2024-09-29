@@ -2,7 +2,7 @@
 
 import Enquirer from "enquirer"
 import { create_character_class } from "../content/classes"
-import { characterClass, characterClassName } from "../types"
+import { characterClass } from "../types"
 import { CharacterSheet } from "../utils/characterFileManager"
 
 export default async function create_character() {

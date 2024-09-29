@@ -4,6 +4,7 @@ import { exit } from "../index";
 import { characterFile } from "../types";
 import { CharacterSheet } from "../utils/characterFileManager";
 import Enquirer from "enquirer";
+import edit_character from "./edit_character";
 
 const commands: Record<string, any> = {
     "Edit Character Sheet": edit_character,
@@ -12,15 +13,12 @@ const commands: Record<string, any> = {
     "Exit": exit
 }
 
-async function edit_character(){
-    console.log("\nEditing Character...\n")
-}
 
-async function continue_adventure(){
+async function continue_adventure(player_char: characterFile){
     console.log("\nContinue Adventure...\n")
 }
 
-async function start_adventure(){
+async function start_adventure(player_char: characterFile){
     console.log("\nStarting Adventure...\n")
 }
 
@@ -56,7 +54,7 @@ export default async function base_game_loop(){
         )
         const selectedFunction = commands[answers.command];
         if (selectedFunction) {
-            await selectedFunction();
+            await selectedFunction(player_char);
         } else {
             console.error("Invalid selection");
         }    

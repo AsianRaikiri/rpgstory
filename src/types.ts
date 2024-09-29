@@ -1,4 +1,4 @@
-export type characterClassName = "Wizard" 
+export type class_name = "Wizard" 
     | "Cleric"
     | "Warrior"
 
@@ -20,8 +20,24 @@ export interface ability {
     damage_amount: number
 }
 
+export interface achievement{
+    name: string, 
+    description: string,
+    characterClass: class_name
+}
+export interface adventure_requirement{
+    level?: number,
+    achievements?: achievement[]
+}
+
+export interface adventure{
+    name: string,
+    current_save?: number,
+    requirements?: adventure_requirement[]
+}
+
 export interface characterClass {
-    name: characterClassName,
+    name: class_name,
     level: number,
     description: string,
     base_abilities: ability[],
@@ -33,9 +49,13 @@ export interface characterFile {
     name: string,
     class: characterClass
     exp: number, 
-    maxHP: number,
+    max_HP: number,
     HP: number,
-    free_stat_points: number
+    max_mana: number, 
+    mana: number,
+    max_stamina: number, 
+    stamina: number,
+    total_stat_points: number,
     stats: {
         strength: number,
         dexterity: number,
@@ -44,6 +64,9 @@ export interface characterFile {
         intelligence: number,
         charisma: number
     }
+    current_adventure?: adventure,
+    finished_adventure?: adventure[],
+    achievements?: achievement[]
     active_abilities: ability[],
     dir: string
 }

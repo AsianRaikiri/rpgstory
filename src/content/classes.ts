@@ -1,4 +1,4 @@
-import { characterClass, characterClassName } from "../types";
+import { characterClass, class_name } from "../types";
 import  *  as ability_list from "./abilities";
 
 const BASE_CLASSES: Record<string, characterClass> = {
@@ -28,7 +28,7 @@ const BASE_CLASSES: Record<string, characterClass> = {
     }
 }
 
-export async function create_character_class(class_name: characterClassName, ): Promise<characterClass>{
+export async function create_character_class(class_name: class_name, ): Promise<characterClass>{
     const created_class =  BASE_CLASSES[class_name]; 
     return created_class
 }
