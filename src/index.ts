@@ -31,9 +31,13 @@ const commands: Record<string, any> = {
     "Create new Character": create_character,
     "Delete existing Character": delete_character,
     "List all existing Characters": list_characters,
-    "Help": help
+    "Help": help,
+    "Exit": exit
 }
 
+async function exit(){
+    process.exit()
+}
 async function main(){
     startingScreen()
     console.time("Loading all Characters")
