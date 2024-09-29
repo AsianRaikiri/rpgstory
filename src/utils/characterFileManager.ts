@@ -83,16 +83,16 @@ export namespace CharacterSheet {
 		await storage.setItem( character.name, character)
 	}
 
-	export async function saveCharFromStorage( character: characterFile ) {
-		await storage.setItem( character.name, character)
+	export async function saveCharToFile(character: characterFile){
+		await makeJson(character, character.dir)
 	}
 
-	export async function updateCharStatsInStorage( character: characterFile ) {
+	export async function updateCharStats( character: characterFile ) {
 		await storage.updateItem( character.name, character )
+		await saveCharToFile( character)
 	}
 
 	export async function getCharFromStorage( character_name: string ): Promise<characterFile> {
-		initStorage()
 		return await storage.getItem( character_name)
 	}
 
@@ -101,15 +101,6 @@ export namespace CharacterSheet {
 		return await storage.valuesWithKeyMatch('-player')
 	}
 
-	export async function getAllChars():Promise<Array<string>> {
-		const char_names: Array<string> = [];
-		const existing_chars = await fs.readdir(ASSET_JSON_STORAGE)
-		existing_chars.forEach(elem =>{
-			const char_name = elem.replace("-player.json", "");
-			char_names.push(char_name)
-		})
-		return char_names
-	}
 	export async function initStorage(){
 		await storage.init( STORAGE_SETTINGS )
 		const file_names =  await fs.readdir(ASSET_JSON_STORAGE)
