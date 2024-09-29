@@ -5,9 +5,9 @@ import { CharacterSheetManager } from "../utils/characterFileManager";
 import { characterFile } from "../types";
 
 export default async function delete_character() {
-    const enquirer = new Enquirer();
+    const enquirer: Enquirer = new Enquirer();
 
-    var keep_deleting = true;
+    var keep_deleting: boolean = true;
     while(keep_deleting) {
         const all_chars: characterFile[] = await CharacterSheetManager.getAllLoadedChars()
         if (!(all_chars.length > 0)){

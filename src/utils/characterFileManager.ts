@@ -3,8 +3,8 @@ import path from "path"
 import { characterFile, characterClass } from '../types';
 
 const storage = require("node-persist")
-const ASSET_JSON_STORAGE = path.resolve(__dirname, '..', 'assets', 'characters')
-const STORAGE_SETTINGS = {
+const ASSET_JSON_STORAGE: string = path.resolve(__dirname, '..', 'assets', 'characters')
+const STORAGE_SETTINGS: Object = {
 	dir: path.resolve(__dirname, '..', 'assets', 'storage'),
 	stringify: JSON.stringify,
 	parse: JSON.parse,
@@ -17,8 +17,8 @@ const STORAGE_SETTINGS = {
 export namespace CharacterSheetManager {	
     export async function readJson( fileName: string ): Promise<Object> {
         try {
-            const str = await fs.readFile( path.resolve(ASSET_JSON_STORAGE, fileName ) )
-            return JSON.parse( str.toString() )
+            const content : Buffer = await fs.readFile( path.resolve(ASSET_JSON_STORAGE, fileName ) )
+            return JSON.parse( content.toString() )
         }
         catch ( e ) {
             console.error("An error occured whilst reading the file:", e)
@@ -71,8 +71,8 @@ export namespace CharacterSheetManager {
     }
 
     export async function deleteCharWithFile( character_name: string ) {
-		const character = await getCharFromStorage(character_name)
-		const deleted = await deleteCharFromStorage( character )
+		const character: characterFile = await getCharFromStorage(character_name)
+		const deleted: boolean = await deleteCharFromStorage( character )
 		if (deleted)
 			await deleteJson(character.dir)
 		else console.warn("Character was only deleted from storage")
@@ -106,7 +106,7 @@ export namespace CharacterSheetManager {
 
 	export async function initStorage(){
 		await storage.init( STORAGE_SETTINGS )
-		const file_names =  await fs.readdir(ASSET_JSON_STORAGE)
+		const file_names: string[] =  await fs.readdir(ASSET_JSON_STORAGE)
 		file_names.forEach(async file_name => {
 			const char_json: characterFile = await readJson(path.resolve(ASSET_JSON_STORAGE, file_name)) as characterFile
 			await loadCharIntoStorage(char_json)

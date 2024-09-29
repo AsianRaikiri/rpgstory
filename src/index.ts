@@ -47,8 +47,8 @@ async function main(){
     await create_asset_folders();
     await CharacterSheetManager.initStorage()
     console.timeEnd("Loading all Characters")
-    const enquirer = new Enquirer()
-    var active_loop = true;
+    const enquirer: Enquirer = new Enquirer()
+    var active_loop: boolean = true;
     while(active_loop){
         var answers: Record <string, any> = await enquirer.prompt([
             {
@@ -58,7 +58,7 @@ async function main(){
                 choices: Object.keys(commands)
             }]
         )
-        const selectedFunction = commands[answers.command];
+        const selectedFunction: Function = commands[answers.command];
         if (selectedFunction) {
             await selectedFunction();
         } else {

@@ -29,6 +29,6 @@ const BASE_CLASSES: Record<string, characterClass> = {
 }
 
 export async function create_character_class(class_name: class_name, ): Promise<characterClass>{
-    const created_class =  BASE_CLASSES[class_name]; 
+    const created_class: characterClass =  BASE_CLASSES[class_name]; 
     return created_class
 }

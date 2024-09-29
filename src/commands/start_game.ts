@@ -23,7 +23,7 @@ async function start_adventure(player_char: characterFile){
 }
 
 export default async function base_game_loop(){
-    const enquirer = new Enquirer();
+    const enquirer: Enquirer = new Enquirer();
 
     const all_chars: characterFile[] = await CharacterSheetManager.getAllLoadedChars()
     if (!(all_chars.length > 0)){
@@ -41,7 +41,7 @@ export default async function base_game_loop(){
     const player_char: characterFile = await CharacterSheetManager.getCharFromStorage(answers.characterName)
 
     console.log(`Now playing as ${player_char.name}`)
-    var keep_playing = true;
+    var keep_playing: boolean = true;
 
     while (keep_playing){
         answers = await enquirer.prompt([
@@ -52,7 +52,7 @@ export default async function base_game_loop(){
                 choices: Object.keys(commands)
             }]
         )
-        const selectedFunction = commands[answers.command];
+        const selectedFunction: Function = commands[answers.command];
         if (selectedFunction) {
             await selectedFunction(player_char);
         } else {

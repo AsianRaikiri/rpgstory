@@ -6,7 +6,7 @@ import { characterClass } from "../types"
 import { CharacterSheetManager } from "../utils/characterFileManager"
 
 export default async function create_character() {
-    const enquirer = new Enquirer();
+    const enquirer: Enquirer = new Enquirer();
     const answers: Record<string, any>  = await enquirer.prompt([
         {
             type: 'text',
@@ -35,7 +35,7 @@ export default async function create_character() {
 		console.log('Permission for Character Creation file creation denied')
 		process.exit(0)
 	}
-    const all_character_names = (await CharacterSheetManager.getAllLoadedChars()).map(char => char.name)
+    const all_character_names: string[] = (await CharacterSheetManager.getAllLoadedChars()).map(char => char.name)
     if(all_character_names.includes(answers.name)) {
         console.log("Character Name exists already, please try again with a different name.")
         return
