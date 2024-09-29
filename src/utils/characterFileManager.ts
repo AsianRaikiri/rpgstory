@@ -14,7 +14,7 @@ const STORAGE_SETTINGS = {
 	forgiveParseErrors: true
 }
 
-export namespace CharacterSheet {	
+export namespace CharacterSheetManager {	
     export async function readJson( fileName: string ): Promise<Object> {
         try {
             const str = await fs.readFile( path.resolve(ASSET_JSON_STORAGE, fileName ) )

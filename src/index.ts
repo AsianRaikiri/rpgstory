@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 import base_game_loop from "./commands/start_game";
-import {CharacterSheet} from "./utils/characterFileManager";
+import {CharacterSheetManager} from "./utils/characterFileManager";
 import create_character from "./commands/create_character";
 import delete_character from "./commands/delete_character";
 import Enquirer from "enquirer";
@@ -45,7 +45,7 @@ async function main(){
     startingScreen()
     console.time("Loading all Characters")
     await create_asset_folders();
-    await CharacterSheet.initStorage()
+    await CharacterSheetManager.initStorage()
     console.timeEnd("Loading all Characters")
     const enquirer = new Enquirer()
     var active_loop = true;

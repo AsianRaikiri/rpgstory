@@ -3,7 +3,7 @@
 import Enquirer from "enquirer"
 import { create_character_class } from "../content/classes"
 import { characterClass } from "../types"
-import { CharacterSheet } from "../utils/characterFileManager"
+import { CharacterSheetManager } from "../utils/characterFileManager"
 
 export default async function create_character() {
     const enquirer = new Enquirer();
@@ -35,13 +35,13 @@ export default async function create_character() {
 		console.log('Permission for Character Creation file creation denied')
 		process.exit(0)
 	}
-    const all_character_names = (await CharacterSheet.getAllLoadedChars()).map(char => char.name)
+    const all_character_names = (await CharacterSheetManager.getAllLoadedChars()).map(char => char.name)
     if(all_character_names.includes(answers.name)) {
         console.log("Character Name exists already, please try again with a different name.")
         return
     }
     console.time("Creating Character")
     const new_class: characterClass = await create_character_class(answers.class)
-    await CharacterSheet.createNewCharacter(answers.name, new_class)
+    await CharacterSheetManager.createNewCharacter(answers.name, new_class)
     console.timeEnd("Creating Character")
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import Enquirer from "enquirer";
-import { CharacterSheet } from "../utils/characterFileManager";
+import { CharacterSheetManager } from "../utils/characterFileManager";
 import { characterFile } from "../types";
 
 export default async function delete_character() {
@@ -9,7 +9,7 @@ export default async function delete_character() {
 
     var keep_deleting = true;
     while(keep_deleting) {
-        const all_chars: characterFile[] = await CharacterSheet.getAllLoadedChars()
+        const all_chars: characterFile[] = await CharacterSheetManager.getAllLoadedChars()
         if (!(all_chars.length > 0)){
             console.log("There are no more chars to delete")
             break;
@@ -29,7 +29,7 @@ export default async function delete_character() {
             }
             ]
         );
-        await CharacterSheet.deleteCharWithFile(answers.characterName);
+        await CharacterSheetManager.deleteCharWithFile(answers.characterName);
         const deleting_loop: Record<string, any>  = await enquirer.prompt([
             {
                 type: 'confirm',

@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
 import { characterFile } from "../types";
-import { CharacterSheet } from "../utils/characterFileManager";
+import { CharacterSheetManager } from "../utils/characterFileManager";
 
 export default async function edit_character(player_char: characterFile){
     console.log("\nEditing Character...\n")
@@ -14,5 +14,5 @@ export default async function edit_character(player_char: characterFile){
     //Convert EXP into Levels and unlock Insights
     //Update Max Stats and current stats
 
-    CharacterSheet.updateCharStats(player_char)
+    CharacterSheetManager.updateCharStats(player_char)
 }

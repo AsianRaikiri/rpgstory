@@ -2,7 +2,7 @@
 
 import { exit } from "../index";
 import { characterFile } from "../types";
-import { CharacterSheet } from "../utils/characterFileManager";
+import { CharacterSheetManager } from "../utils/characterFileManager";
 import Enquirer from "enquirer";
 import edit_character from "./edit_character";
 
@@ -25,7 +25,7 @@ async function start_adventure(player_char: characterFile){
 export default async function base_game_loop(){
     const enquirer = new Enquirer();
 
-    const all_chars: characterFile[] = await CharacterSheet.getAllLoadedChars()
+    const all_chars: characterFile[] = await CharacterSheetManager.getAllLoadedChars()
     if (!(all_chars.length > 0)){
         console.log("There are no  characters to play as.\nPlease create a character first.")
         return
@@ -38,7 +38,7 @@ export default async function base_game_loop(){
             message: "What character do you want to play as?",
             choices: char_names,
         }])
-    const player_char: characterFile = await CharacterSheet.getCharFromStorage(answers.characterName)
+    const player_char: characterFile = await CharacterSheetManager.getCharFromStorage(answers.characterName)
 
     console.log(`Now playing as ${player_char.name}`)
     var keep_playing = true;
