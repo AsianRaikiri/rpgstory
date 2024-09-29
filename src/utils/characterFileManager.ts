@@ -43,14 +43,8 @@ export namespace CharacterSheet {
 		await fs.unlink( path.resolve(ASSET_JSON_STORAGE, filePath) )
 	}
 
-    function createNewId(){
-        return "" + "-player"
-    }
-
     export async function createNewCharacter(name: string, characterClass: characterClass): Promise<boolean> {
-        const new_id = createNewId();
         const newCharacter: characterFile = {
-            Id: new_id,
             name: name,
             class: characterClass,
             exp: 0,
@@ -64,45 +58,45 @@ export namespace CharacterSheet {
                 wisdom: 2,
                 charisma: 2
             },
-            learned_abilities: [],
-            dir: `${name}_${new_id}.json`
+            active_abilities: characterClass.base_abilities,
+            dir: `${name}-player.json`
         }
-        return await makeJson(newCharacter, `${newCharacter.name}_${newCharacter.Id}.json`)
+        return await makeJson(newCharacter, `${newCharacter.name}-player.json`)
     }
 
-    export async function deleteCharWithFile( character_id: string ) {
-		const character = await deleteNaviFromStorage( character_id )
+    export async function deleteCharWithFile( character_name: string ) {
+		const character = await deleteNaviFromStorage( character_name )
 
 		if (character)
 			await deleteJson(character.dir)
 		else console.warn("Navi was only deleted from storage")
 	}
 
-	export async function deleteNaviFromStorage(character_id: string ): Promise<characterFile | undefined> {
+	export async function deleteNaviFromStorage(character_name: string ): Promise<characterFile | undefined> {
 		await storage.init(STORAGE_SETTINGS)
-		const res = await storage.removeItem( character_id )
+		const res = await storage.removeItem( character_name )
 		if ( res.removed )
 			return JSON.parse( res.file )
 		else return undefined
 	}
     export async function loadNaviIntoStorage( character: characterFile ) {
 		await storage.init(STORAGE_SETTINGS)
-		await storage.setItem( character.Id, character)
+		await storage.setItem( character.name, character)
 	}
 
 	export async function saveNaviFromStorage( character: characterFile ) {
 		await storage.init( STORAGE_SETTINGS )
-		await storage.setItem( character.Id, character)
+		await storage.setItem( character.name, character)
 	}
 
 	export async function updateNaviStatsInStorage( character: characterFile ) {
 		await storage.init( STORAGE_SETTINGS )
-		await storage.updateItem( character.Id, character )
+		await storage.updateItem( character.name, character )
 	}
 
-	export async function getNaviFromStorage( character_Id: string ): Promise<characterFile> {
+	export async function getNaviFromStorage( character_name: string ): Promise<characterFile> {
 		await storage.init( STORAGE_SETTINGS )
-		return await storage.getItem( character_Id)
+		return await storage.getItem( character_name)
 	}
 
 	export async function getAllLoadedNavis(): Promise<characterFile[]> {

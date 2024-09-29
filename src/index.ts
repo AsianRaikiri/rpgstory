@@ -27,7 +27,7 @@ async function main(){
         {
             type: "select",
             name: "command",
-            message: "What do command do you wanna use?",
+            message: "What command do you wanna use?",
             choices: Object.keys(commands)
         },]
     ).then((answers: Record<string, any>) => {

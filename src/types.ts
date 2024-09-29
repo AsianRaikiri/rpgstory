@@ -1,5 +1,5 @@
 export type characterClassName = "Wizard" 
-    | "Archer"
+    | "Cleric"
     | "Warrior"
 
 export type cost_type = "Mana"
@@ -30,7 +30,6 @@ export interface characterClass {
 }
 
 export interface characterFile {
-    Id: string,
     name: string,
     class: characterClass
     exp: number, 
@@ -44,6 +43,6 @@ export interface characterFile {
         intelligence: number,
         charisma: number
     }
-    learned_abilities: ability[],
+    active_abilities: ability[],
     dir: string
 }
