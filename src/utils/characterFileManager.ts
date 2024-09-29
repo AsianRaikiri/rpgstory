@@ -40,7 +40,6 @@ export namespace CharacterSheet {
 	}       
 
 	export async function deleteJson( filePath: string ) {
-		console.log(`This is the link to the file to delete ${path.resolve(ASSET_JSON_STORAGE, filePath)}`)
 		await fs.unlink( path.resolve(ASSET_JSON_STORAGE, filePath) )
 	}
 
@@ -68,12 +67,11 @@ export namespace CharacterSheet {
     }
 
     export async function deleteCharWithFile( character_name: string ) {
-		console.log(`This is the link to the player to delete ${path.resolve(ASSET_JSON_STORAGE, character_name)}`)
 		const character = await getCharFromStorage(character_name)
 		const deleted = await deleteCharFromStorage( character )
 		if (deleted)
 			await deleteJson(character.dir)
-		else console.warn("Navi was only deleted from storage")
+		else console.warn("Character was only deleted from storage")
 	}
 
 	export async function deleteCharFromStorage(character: characterFile ): Promise<boolean> {

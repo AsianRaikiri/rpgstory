@@ -25,7 +25,7 @@ export default async function delete_character() {
             {
                 type: 'confirm',
                 name: 'confirm',
-                message: `Are you sure you want to create this Character?`
+                message: `Are you sure you want to delete this Character?`
             }
             ]
         );
