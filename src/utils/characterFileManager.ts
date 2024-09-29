@@ -112,4 +112,7 @@ export namespace CharacterSheetManager {
 			await loadCharIntoStorage(char_json)
 		})
 	}
+	export async function destroyStorage(){
+		await storage.clear()
+	}
 }

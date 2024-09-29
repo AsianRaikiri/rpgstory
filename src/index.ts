@@ -75,6 +75,7 @@ async function main(){
         active_loop = answers.keep_going;
 
     }
+    await CharacterSheetManager.destroyStorage()
 }
 
 main()
