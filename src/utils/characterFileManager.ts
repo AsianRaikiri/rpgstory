@@ -48,21 +48,23 @@ export namespace CharacterSheetManager {
             name: name,
             class: characterClass,
             exp: 0,
-            max_HP: 10,
-            HP: 10,
-			max_mana: 1,
-			mana: 1,
-			max_stamina: 1,
-			stamina: 1,
-			total_stat_points: 26,
-            stats:{
-                strength: 1,
-                dexterity: 1,
-                constitution: 1, 
-                intelligence: 1,
-                wisdom: 1,
-                charisma: 1
-            },
+            statBlock: {
+				max_HP: 10,
+				HP: 10,
+				max_mana: 1,
+				mana: 1,
+				max_stamina: 1,
+				stamina: 1,
+				total_stat_points: 26,
+				base_stats:{
+					strength: 1,
+					dexterity: 1,
+					constitution: 1, 
+					intelligence: 1,
+					wisdom: 1,
+					charisma: 1
+				}
+			},
             active_abilities: characterClass.base_abilities,
             dir: `${name}-player.json`
         }

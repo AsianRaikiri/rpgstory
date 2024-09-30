@@ -44,11 +44,27 @@ export interface characterClass {
     secondary_abilities: ability[],
     tertary_abilities: ability[]
 }
-
+export interface baseStats {    
+    strength: number,
+    dexterity: number,
+    constitution: number,
+    wisdom: number, 
+    intelligence: number,
+    charisma: number
+}
 export interface characterFile {
     name: string,
     class: characterClass
     exp: number, 
+    statBlock: statBlock
+    current_adventure?: adventure,
+    finished_adventure?: adventure[],
+    achievements?: achievement[]
+    active_abilities: ability[],
+    dir: string
+}
+
+export interface statBlock {
     max_HP: number,
     HP: number,
     max_mana: number, 
@@ -56,17 +72,5 @@ export interface characterFile {
     max_stamina: number, 
     stamina: number,
     total_stat_points: number,
-    stats: {
-        strength: number,
-        dexterity: number,
-        constitution: number,
-        wisdom: number, 
-        intelligence: number,
-        charisma: number
-    }
-    current_adventure?: adventure,
-    finished_adventure?: adventure[],
-    achievements?: achievement[]
-    active_abilities: ability[],
-    dir: string
+    base_stats: baseStats
 }
