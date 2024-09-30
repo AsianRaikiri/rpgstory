@@ -5,6 +5,8 @@ import { create_character_class } from "../content/classes"
 import { characterClass } from "../types"
 import { CharacterSheetManager } from "../utils/characterFileManager"
 
+const AVAILABLE_CLASSES: string[] = ["Cleric", "Warrior", "Wizard"]
+
 export default async function create_character() {
     const enquirer: Enquirer = new Enquirer();
     const answers: Record<string, any>  = await enquirer.prompt([
@@ -22,7 +24,7 @@ export default async function create_character() {
             type: "select",
             name: "class",
             message: "What class do you wanna choose?",
-            choices: ["Cleric", "Warrior", "Wizard"],
+            choices: AVAILABLE_CLASSES,
         },
         {
             type: 'confirm',
