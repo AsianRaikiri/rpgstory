@@ -29,7 +29,7 @@ function startingScreen(){
     console.log("This is the starting script text for this rpg game")
 }
 
-const commands: Record<string, any> = {
+const commands: Record<string, Function> = {
     "Start playing": base_game_loop,
     "Create new Character": create_character,
     "Delete existing Character": delete_character,
