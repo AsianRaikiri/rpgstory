@@ -9,7 +9,7 @@ const BASE_CLASSES: Record<string, characterClass> = {
     base_abilities: [ability_list.FIREBALL],
     secondary_abilities: [ability_list.MAGIC_SHOT],
     tertary_abilities: [ability_list.EXPLOSION],
-},
+    },
     Cleric: {
         name: "Cleric",
         level: 1, 

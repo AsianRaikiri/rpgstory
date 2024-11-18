@@ -74,3 +74,21 @@ export interface statBlock {
     total_stat_points: number,
     base_stats: baseStats
 }
+export interface enemy_file {
+    name: string,
+    level: number
+    active_abilities: ability[],
+    statBlock: statBlock
+}
+export interface fight_stats {
+    name: string, 
+    initiative: number,
+    max_HP: number,
+    HP: number,
+    max_mana: number, 
+    mana: number,
+    max_stamina: number, 
+    stamina: number,
+    active_abilities: ability[]
+    base_stats: baseStats
+}
