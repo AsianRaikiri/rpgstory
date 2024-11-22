@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/AsianRaikiri/rpgstory#readme",
   "dependencies": {
+    "cliui": "^8.0.1",
     "enquirer": "^2.4.1",
     "figlet": "^1.7.0",
     "node-persist": "^4.0.3"
