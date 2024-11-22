@@ -1,5 +1,9 @@
 import { getRandomNumber } from "../commands/start_battle";
 import { ability, fight_stats, cost_type, characterClass } from '../types';
+import { PlayerUI } from "./ui";
+
+
+const UI = new PlayerUI()
 
 export class BattleSimulacrum{
     player: fight_stats
@@ -43,12 +47,11 @@ export class BattleSimulacrum{
 
     public async MainLoop(){
         while (!this.fightOver()){
-            //TODO: While in Loop, update Battle UI
+            UI.resetScreen()
+            UI.getBattleUi(this.player, this.enemyList)
             var activeCharacter = this.initiativeList[this.activeInitiative]
             if (activeCharacter == this.player){
-                var action: ability = await this.getPlayerAction()
-                //TODO: Change that to get actual target instead of random enemy
-                var target: fight_stats = this.enemyList[getRandomNumber(0, this.enemyList.length - 1)]
+                var [action, target] = await UI.askForActionAndTarget(this.player, this.enemyList)
             }else{
                 var action: ability = await this.getRandomEnemyAction(activeCharacter)
                 var target: fight_stats = this.player
@@ -76,6 +79,7 @@ export class BattleSimulacrum{
         return enemyCharacter.active_abilities[getRandomNumber(0, enemyCharacter.active_abilities.length-1)]
     }
 
+    //Add some output to read what actually happened
     private async applyAction(action: ability, user: fight_stats, target: fight_stats){
         switch(action.cost_type){
             case "Health": {
