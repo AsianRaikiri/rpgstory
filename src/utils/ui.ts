@@ -70,7 +70,6 @@ export class PlayerUI{
 		)
 	}
     async askForActionAndTarget(character: fight_stats, enemyList: fight_stats[]) : Promise<[ability, fight_stats]> {
-    //Make the enquirer that gets the actual user actions 
         const enquirer: Enquirer = new Enquirer();
         const ability_names: string[] = await character.active_abilities.map((current_ability: ability) => current_ability.name)
         const enemy_names: string[] = await enemyList.map((enemy: fight_stats) => enemy.name)

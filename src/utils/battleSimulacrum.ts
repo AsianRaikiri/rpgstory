@@ -57,7 +57,7 @@ export class BattleSimulacrum{
                 var target: fight_stats = this.player
             }
 
-            this.applyAction(action, activeCharacter, target)
+            await this.applyAction(action, activeCharacter, target)
 
             this.updateStats()
 
@@ -68,18 +68,11 @@ export class BattleSimulacrum{
         }
         return this.player
     }
-
-
-    //TODO: Change that to actually get player input instead of random attack
-    private async getPlayerAction(): Promise<ability> {
-        return this.player.active_abilities[getRandomNumber(0, this.player.active_abilities.length-1)]
-    }
     
     private async getRandomEnemyAction(enemyCharacter: fight_stats): Promise<ability> {
         return enemyCharacter.active_abilities[getRandomNumber(0, enemyCharacter.active_abilities.length-1)]
     }
 
-    //Add some output to read what actually happened
     private async applyAction(action: ability, user: fight_stats, target: fight_stats){
         switch(action.cost_type){
             case "Health": {
@@ -95,7 +88,8 @@ export class BattleSimulacrum{
             }
         }
         target.HP = target.HP - action.damage_amount
-
+        console.log(`> ${user.name} paying ${action.cost_amount} of ${action.cost_type} to use ${action.name}.`)
+        console.log(`> ${user.name} dealing ${target.name} ${action.damage_amount} of damage with ${action.name}.`)
         this.initiativeList.forEach(character => {
             if(character.name == target.name){
                 var charIndex = this.initiativeList.indexOf(character)
