@@ -22,6 +22,27 @@ export class PlayerUI{
         return this.getUiString()
     }
 
+    getPlayerAllStats(character: characterFile){
+        this.addBar()
+        this.addVoid()
+        this.addPlayerStats(character)
+        this.addBar()
+    }
+
+    getPlayerBaseStats(character: characterFile){
+        this.addBar()
+        this.addVoid()
+        this.addStatBlock(character)
+        this.addBar()
+    }
+
+    getAbilities(character: characterFile){
+        this.addBar()
+        this.addVoid()
+        this.addAbilities(character)
+        this.addBar()
+    }
+
     addVoid(){
         this.ui.div("")
     }
@@ -90,5 +111,47 @@ export class PlayerUI{
         const ability_index: number = character.active_abilities.findIndex((current_ability: ability) => current_ability.name == answers.abilityName)
         const target_index: number = enemyList.findIndex((enemy: fight_stats) => enemy.name == answers.targetName)
         return [character.active_abilities[ability_index], enemyList[target_index]]
+    }
+
+    addPlayerStats(character: characterFile){
+        this.addExp(character)
+        this.addBar()
+        this.addBaseStats(character)
+        this.addBar()
+        this.addStatBlock(character)
+    }
+    addBaseStats(character: characterFile){
+        this.ui.div(
+			{ text: `HP: ${character.statBlock.HP} / ${character.statBlock.max_HP}`, padding: [0,0,0,0], align: 'left' },
+			{ text: `Mana: ${character.statBlock.mana} / ${character.statBlock.max_mana}`, padding: [0,0,0,0], align: 'left' },
+			{ text: `Stamina: ${character.statBlock.stamina} / ${character.statBlock.max_stamina}`, padding: [0,0,0,0], align: 'left' },
+		)
+    }
+    addStatBlock(character: characterFile){
+        this.ui.div(
+			{ text: `Strength: ${character.statBlock.base_stats.strength}`, padding: [0,0,0,0], align: 'left' },
+			{ text: `Dexterity: ${character.statBlock.base_stats.dexterity}`, padding: [0,0,0,0], align: 'left' },
+			{ text: `Constitution: ${character.statBlock.base_stats.constitution}`, padding: [0,0,0,0], align: 'left' },
+			{ text: `Intelligence: ${character.statBlock.base_stats.intelligence}`, padding: [0,0,0,0], align: 'left' },
+			{ text: `Wisdom: ${character.statBlock.base_stats.wisdom}`, padding: [0,0,0,0], align: 'left' },
+			{ text: `Charisma: ${character.statBlock.base_stats.charisma}`, padding: [0,0,0,0], align: 'left' },
+        )
+    }
+    addExp(character: characterFile){
+        this.ui.div(
+            { text: `${character.name} ${character.class.name} Level ${character.class.level}`, padding: [0,0,0,0], align: 'left'},
+            {text: `Available Exp: ${character.exp}`, padding: [0,0,0,0], align:'left'}
+
+        )
+    }
+    addAbilities(character: characterFile){
+        character.active_abilities.forEach((current_ability: ability)=>{
+            this.ui.div(
+                {text: `${current_ability.name}:`, padding: [0,0,0,0], align: 'left'},                
+                {text: `Resource Cost: ${current_ability.cost_amount} ${current_ability.cost_type}`, padding: [0,0,0,0], align: 'left'},
+                {text: `Description: \n${current_ability.description}`, padding: [0,0,0,0], align: 'left'}
+            )
+            this.addBar()
+        })
     }
 }
