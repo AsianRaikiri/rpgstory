@@ -27,18 +27,20 @@ export class BattleSimulacrum{
             this.initiativeList.push(enemy)
         });
         if (this.initiativeList.length != 0){
-            this.sortInitiativeList()        }
+            this.sortInitiativeList()        
+        }
     }
 
     private sortInitiativeList(){
         for (let i = 0; i < this.initiativeList.length; i++){
-            for ( let j = 0; j < this.initiativeList.length + i - 1; j++){
+            for ( let j = 0; j < this.initiativeList.length - 1; j++){
                 this.sortTwo(j+1, j);
             }
         }
     }
 
     private sortTwo(next: number, last: number){
+        console.log("This is the thing" + typeof(this.initiativeList[next]))
         if(this.initiativeList[next].initiative > this.initiativeList[last].initiative){
             var tempHolder : fight_stats = this.initiativeList[last]
             this.initiativeList[last] = this.initiativeList[next]
@@ -71,7 +73,9 @@ export class BattleSimulacrum{
     }
     
     private async getRandomEnemyAction(enemyCharacter: fight_stats): Promise<ability> {
-        return enemyCharacter.active_abilities[getRandomNumber(0, enemyCharacter.active_abilities.length-1)]
+        console.log("This is not working: " + typeof(enemyCharacter))
+        var randomNumber = getRandomNumber(0, enemyCharacter.active_abilities.length-1)
+        return enemyCharacter.active_abilities[randomNumber]
     }
 
     private async applyAction(action: ability, user: fight_stats, target: fight_stats){
