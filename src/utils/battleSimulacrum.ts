@@ -1,7 +1,6 @@
 import { getRandomNumber } from "../utils/math";
-import { ability, fight_stats, cost_type, characterClass } from '../types';
-import { PlayerUI } from "./ui";
-
+import { ability, fight_stats } from '../types';
+import { PlayerUI, sleep } from "./ui";
 
 const UI = new PlayerUI()
 
@@ -51,7 +50,7 @@ export class BattleSimulacrum{
     public async MainLoop(){
         while (!this.fightOver()){
             UI.resetScreen()
-            console.log(UI.getBattleUi(this.player, this.enemyList))
+            console.log(UI.getBattleUi(this.player, this.enemyList, this.initiativeList))
             var activeCharacter = this.initiativeList[this.activeInitiative]
             if (activeCharacter == this.player){
                 var [action, target] = await UI.askForActionAndTarget(this.player, this.enemyList)
@@ -73,7 +72,6 @@ export class BattleSimulacrum{
     }
     
     private async getRandomEnemyAction(enemyCharacter: fight_stats): Promise<ability> {
-        console.log("This is not working: " + typeof(enemyCharacter))
         var randomNumber = getRandomNumber(0, enemyCharacter.active_abilities.length-1)
         return enemyCharacter.active_abilities[randomNumber]
     }
@@ -95,6 +93,7 @@ export class BattleSimulacrum{
         target.HP = target.HP - action.damage_amount
         console.log(`> ${user.name} paying ${action.cost_amount} of ${action.cost_type} to use ${action.name}.`)
         console.log(`> ${user.name} dealing ${target.name} ${action.damage_amount} of damage with ${action.name}.`)
+        await sleep()
         this.initiativeList.forEach(character => {
             if(character.name == target.name){
                 var charIndex = this.initiativeList.indexOf(character)

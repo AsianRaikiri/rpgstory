@@ -5,7 +5,7 @@ export const FIREBALL: ability = {
     description: "Feu Feu",
     cost_amount: 0,
     cost_type: "Mana",
-    damage_amount: 0, 
+    damage_amount: 1, 
     damage_type: "Magical"
 }
 export const MAGIC_SHOT: ability = {

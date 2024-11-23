@@ -2,6 +2,9 @@ import UI from "cliui"
 import { ability, characterFile, enemy_file, fight_stats } from '../types';
 import Enquirer from "enquirer";
 
+
+export const sleep = (ms = 2000) => new Promise( (r) => setTimeout( r, ms ) )
+
 export class PlayerUI{
     readonly width: number
     readonly ui: ReturnType<typeof UI>
@@ -11,8 +14,12 @@ export class PlayerUI{
         this.ui = UI({width: this.width})
     }
     
-    getBattleUi(character: fight_stats, enemyList: fight_stats[]){
+    getBattleUi(character: fight_stats, enemyList: fight_stats[], initiativeList: fight_stats[]){
+        this.addBar()
         this.addVoid()
+        this.addInitiative(initiativeList)
+        this.addVoid()
+        this.addBar()
         this.addEnemyListUI(enemyList)
         this.addVoid()
         this.addBar()
@@ -70,11 +77,9 @@ export class PlayerUI{
 	private addEnemyListUI(enemyList: fight_stats[]) {
 
 		for (const enemy of enemyList) {
-			let r1 = ''
-			let r2 = ''
 
-            r1 = enemy.name
-            r2 = `HP: ${enemy.HP} / ${enemy.max_HP}`
+            let r1 = enemy.name
+            let r2 = `HP: ${enemy.HP} / ${enemy.max_HP}`
 			
 			this.ui.div(
 				{ text: r1, align: 'left', padding: [0,0,0,8] },
@@ -166,5 +171,16 @@ export class PlayerUI{
             )
             this.addBar()
         })
+    }
+    addInitiative(initiativeList: fight_stats[]){
+		for (const character of initiativeList) {
+
+            let r1 = character.name
+            let r2 = `Initiative: ${character.initiative}`
+			
+			this.ui.div(
+				{ text: r1, align: 'left', padding: [0,0,0,8] },
+				{ text: r2, align: 'right', padding: [0,2,0,0] } )
+		}
     }
 }
