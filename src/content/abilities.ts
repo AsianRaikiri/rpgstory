@@ -3,9 +3,9 @@ import { ability } from "../types"
 export const FIREBALL: ability = {
     name: "Fireball",
     description: "Feu Feu",
-    cost_amount: 2,
+    cost_amount: 0,
     cost_type: "Mana",
-    damage_amount: 2, 
+    damage_amount: 0, 
     damage_type: "Magical"
 }
 export const MAGIC_SHOT: ability = {
