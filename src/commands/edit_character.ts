@@ -13,7 +13,7 @@ const commands: Record<string, Function> = {
 }
 
 export function showBaseStats(player: characterFile) {
-
+    
 }
 
 export function showAllStats(player: characterFile) {

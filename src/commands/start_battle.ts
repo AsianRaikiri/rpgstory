@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 
-import Enquirer from "enquirer"
-import { create_character_class } from "../content/classes"
-import { characterClass, characterFile, enemy_file, fight_stats } from "../types"
+import { characterFile, enemy_file, fight_stats } from "../types"
 import { CharacterSheetManager } from "../utils/characterFileManager"
 import { BattleSimulacrum } from "../utils/battleSimulacrum"
+import { getRandomNumber } from "../utils/math"
 
 export default async function startBattle(playerCharacter: characterFile, enemies: enemy_file[]){
     var playerFightingFile: fight_stats = createPlayerFightStats(playerCharacter)
@@ -52,10 +51,6 @@ function createEnemyFightStats(enemies: enemy_file[]): fight_stats[]{
         counter += 1
     });
     return final_fighters
-}
-
-export function getRandomNumber(min: number, max: number): number{
-    return Math.floor(Math.random()*(max-min +1 )+ min)
 }
 
 function updatePlayerStats(newFightStats: fight_stats, oldStats: characterFile){

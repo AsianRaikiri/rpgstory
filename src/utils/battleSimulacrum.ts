@@ -1,4 +1,4 @@
-import { getRandomNumber } from "../commands/start_battle";
+import { getRandomNumber } from "../utils/math";
 import { ability, fight_stats, cost_type, characterClass } from '../types';
 import { PlayerUI } from "./ui";
 
