@@ -57,7 +57,7 @@ export default async function edit_character(player_char: characterFile){
 
         CharacterSheetManager.updateCharStats(player_char)
 
-        console.log("\n");
+        console.log("\n\n\n");
         answers = await enquirer.prompt([
             {
                 type: "confirm",
