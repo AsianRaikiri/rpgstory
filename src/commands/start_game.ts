@@ -67,7 +67,7 @@ export default async function base_game_loop(){
             {
                 type: "confirm",
                 name: "keep_going",
-                message: `Do you want to do anything else in the main Menu ${player_char.name}?`,
+                message: `Do you want to do anything else in the Main Menu ${player_char.name}?`,
             }]
         )
         keep_playing = answers.keep_going;

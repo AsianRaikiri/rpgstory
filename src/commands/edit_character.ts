@@ -4,6 +4,7 @@ import Enquirer from 'enquirer';
 import { ability, baseStats, characterFile, statBlock } from '../types';
 import { CharacterSheetManager } from "../utils/characterFileManager";
 import { PlayerUI } from '../utils/ui';
+import { exit } from '../index';
 
 
 const UI = new PlayerUI()
@@ -11,6 +12,7 @@ const commands: Record<string, Function> = {
     "Show Character Stats": showStatblock,
     "Show all Stats": showAllStats,
     "Show all available abilities": showAbilities,
+    "Exit": exit
 }
 
 export function showStatblock(player: characterFile) {
