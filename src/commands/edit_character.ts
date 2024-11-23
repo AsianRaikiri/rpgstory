@@ -62,7 +62,7 @@ export default async function edit_character(player_char: characterFile){
             {
                 type: "confirm",
                 name: "keep_going",
-                message: `Do you want to do anything else ${player_char.name}?`,
+                message: `Do you want to edit anything else in your character sheet ${player_char.name}?`,
             }]
         )
         keep_editing = answers.keep_going;

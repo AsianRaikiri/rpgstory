@@ -26,7 +26,8 @@ export class BattleSimulacrum{
         this.enemyList.forEach(enemy => {
             this.initiativeList.push(enemy)
         });
-        this.sortInitiativeList()
+        if (this.initiativeList.length != 0){
+            this.sortInitiativeList()        }
     }
 
     private sortInitiativeList(){

@@ -132,12 +132,22 @@ export class PlayerUI{
     }
     addStatBlock(character: characterFile){
         this.ui.div(
-			{ text: `Strength: ${character.statBlock.base_stats.strength}`, padding: [0,0,0,0], align: 'left' },
-			{ text: `Dexterity: ${character.statBlock.base_stats.dexterity}`, padding: [0,0,0,0], align: 'left' },
-			{ text: `Constitution: ${character.statBlock.base_stats.constitution}`, padding: [0,0,0,0], align: 'left' },
-			{ text: `Intelligence: ${character.statBlock.base_stats.intelligence}`, padding: [0,0,0,0], align: 'left' },
-			{ text: `Wisdom: ${character.statBlock.base_stats.wisdom}`, padding: [0,0,0,0], align: 'left' },
-			{ text: `Charisma: ${character.statBlock.base_stats.charisma}`, padding: [0,0,0,0], align: 'left' },
+			{ text: `Strength: ${character.statBlock.base_stats.strength}`, padding: [0,0,0,0], align: 'left' }
+        )
+        this.ui.div(
+            { text: `Dexterity: ${character.statBlock.base_stats.dexterity}`, padding: [0,0,0,0], align: 'left' }
+        )
+        this.ui.div(
+            { text: `Constitution: ${character.statBlock.base_stats.constitution}`, padding: [0,0,0,0], align: 'left' }
+        )
+        this.ui.div(
+			{ text: `Intelligence: ${character.statBlock.base_stats.intelligence}`, padding: [0,0,0,0], align: 'left' }
+        )
+        this.ui.div(
+			{ text: `Wisdom: ${character.statBlock.base_stats.wisdom}`, padding: [0,0,0,0], align: 'left' }
+        )
+        this.ui.div(
+			{ text: `Charisma: ${character.statBlock.base_stats.charisma}`, padding: [0,0,0,0], align: 'left' }
         )
     }
     addExp(character: characterFile){

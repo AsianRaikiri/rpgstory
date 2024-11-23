@@ -6,8 +6,8 @@ import { BattleSimulacrum } from "../utils/battleSimulacrum"
 import { getRandomNumber } from "../utils/math"
 
 export default async function startBattle(playerCharacter: characterFile, enemies: enemy_file[]){
-    var playerFightingFile: fight_stats = createPlayerFightStats(playerCharacter)
-    var enemiesFightingFile: fight_stats[] =  createEnemyFightStats(enemies)
+    var playerFightingFile: fight_stats = await createPlayerFightStats(playerCharacter)
+    var enemiesFightingFile: fight_stats[] = await createEnemyFightStats(enemies)
     const battle = new BattleSimulacrum(playerFightingFile, enemiesFightingFile)
     var newPlayerStats: fight_stats = await battle.MainLoop()
     playerCharacter = updatePlayerStats(newPlayerStats, playerCharacter)
@@ -15,7 +15,7 @@ export default async function startBattle(playerCharacter: characterFile, enemie
     return
 }
 
-function createPlayerFightStats(player: characterFile): fight_stats {
+async function createPlayerFightStats(player: characterFile): Promise<fight_stats> {
     var player_fight_stats : fight_stats = {
         name: player.name,
         initiative: getRandomNumber(1,20) + player.statBlock.base_stats.dexterity,
@@ -31,7 +31,7 @@ function createPlayerFightStats(player: characterFile): fight_stats {
     return player_fight_stats
 }
 
-function createEnemyFightStats(enemies: enemy_file[]): fight_stats[]{
+async function createEnemyFightStats(enemies: enemy_file[]): Promise<fight_stats[]>{
     var final_fighters: fight_stats[] = []
     var counter : number = 0
     enemies.forEach(enemy => {
