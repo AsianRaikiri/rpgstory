@@ -62,9 +62,9 @@ export class BattleSimulacrum{
             await this.applyAction(action, activeCharacter, target)
 
             await this.updateStats()
-
+            await this.moveDeadEnemies()
             this.activeInitiative += 1
-            if(this.activeInitiative == this.initiativeList.length){
+            if(this.activeInitiative >= this.initiativeList.length){
                 this.activeInitiative = 0;
             }
         }
@@ -94,36 +94,43 @@ export class BattleSimulacrum{
         console.log(`> ${user.name} paying ${action.cost_amount} of ${action.cost_type} to use ${action.name}.`)
         console.log(`> ${user.name} dealing ${target.name} ${action.damage_amount} of damage with ${action.name}.`)
         await sleep()
-        this.initiativeList.forEach(character => {
-            if(character.name == target.name){
-                var charIndex = this.initiativeList.indexOf(character)
-                this.initiativeList[charIndex] = target
+        var charIndex = this.initiativeList.findIndex((character: fight_stats) => character.name == user.name)
+        this.initiativeList[charIndex] = user
+        var charIndex = this.initiativeList.findIndex((character: fight_stats) => character.name == target.name)
+        this.initiativeList[charIndex] = target
+        if(target.name == this.player.name){
+            this.player = target
+        }else if(user.name == this.player.name){
+            this.player = user
+        }
+    }
+
+    private async updateStats(){
+        this.initiativeList.forEach((character: fight_stats) => {
+            if (character.name == this.player.name){
+                this.player = character
+                return
             }
-            if(character.name == user.name){
-                var charIndex = this.initiativeList.indexOf(character)
-                this.initiativeList[charIndex] = user
+
+            var enemyListIndex = this.enemyList.findIndex((char: fight_stats) => char.name == character.name)
+            if(character.HP > 0){
+                this.enemyList[enemyListIndex] = character
+            }
+            });
+    }
+
+    private async moveDeadEnemies(){
+        this.enemyList.forEach((enemy: fight_stats, index)=>{
+            if(enemy.HP <= 0){
+                var initiativeIndex = this.initiativeList.findIndex((char: fight_stats)=> char.name == enemy.name)
+                this.initiativeList.splice(initiativeIndex, 1)
+                this.enemyList.splice(index, 1)
+                this.deadEnemies.push(enemy)
             }
         })
     }
 
-    private async updateStats(){
-        this.initiativeList.forEach(character => {
-            if (character == this.player){
-                this.player = character
-            }else {
-                var enemyListIndex = this.enemyList.indexOf(character)
-                if(character.HP > 0){
-                    this.enemyList[enemyListIndex] = character
-                }else{
-                    this.initiativeList.splice(this.activeInitiative, 1)
-                    this.enemyList.splice(enemyListIndex, 1)
-                    this.deadEnemies.push(character)
-                }
-            }
-        });
-    }
-
     private fightOver() : boolean {
-        return (this.enemyList.length == 0) || (this.player.HP == 0)
+        return (this.enemyList.length == 0) || (this.player.HP <= 0)
     }
 }

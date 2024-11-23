@@ -4,15 +4,35 @@ import { characterFile, enemy_file, fight_stats } from "../types"
 import { CharacterSheetManager } from "../utils/characterFileManager"
 import { BattleSimulacrum } from "../utils/battleSimulacrum"
 import { getRandomNumber } from "../utils/math"
+import Enquirer from "enquirer";
+import { create_enemy } from "../content/enemies";
 
-export default async function startBattle(playerCharacter: characterFile, enemies: enemy_file[]){
-    var playerFightingFile: fight_stats = await createPlayerFightStats(playerCharacter)
-    var enemiesFightingFile: fight_stats[] = await createEnemyFightStats(enemies)
-    const battle = new BattleSimulacrum(playerFightingFile, enemiesFightingFile)
-    var newPlayerStats: fight_stats = await battle.MainLoop()
-    playerCharacter = updatePlayerStats(newPlayerStats, playerCharacter)
-    CharacterSheetManager.updateCharStats(playerCharacter)
-    return
+export default async function start_battle(playerCharacter: characterFile){
+    const enquirer: Enquirer = new Enquirer();
+    var keep_fighting: boolean = true;
+
+    while (keep_fighting){
+        var randomEnemies: enemy_file[] = []
+        for (let i = 0; i < getRandomNumber(1,5); i++){
+            randomEnemies.push(create_enemy("Rat"))
+        }
+        
+        var playerFightingFile: fight_stats = await createPlayerFightStats(playerCharacter)
+        var enemiesFightingFile: fight_stats[] = await createEnemyFightStats(randomEnemies)
+        const battle = new BattleSimulacrum(playerFightingFile, enemiesFightingFile)
+        var newPlayerStats: fight_stats = await battle.MainLoop()
+        playerCharacter = updatePlayerStats(newPlayerStats, playerCharacter)
+        CharacterSheetManager.updateCharStats(playerCharacter)
+        console.log("\n");
+        var answers: Record<string, any> = await enquirer.prompt([
+            {
+                type: "confirm",
+                name: "keep_going",
+                message: `Do you want to fight another encounter ${playerCharacter.name}?`,
+            }]
+        )
+        keep_fighting = answers.keep_going;
+    }
 }
 
 async function createPlayerFightStats(player: characterFile): Promise<fight_stats> {

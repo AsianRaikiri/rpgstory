@@ -13,7 +13,7 @@ const commands: Record<string, any> = {
     "Edit Character Sheet": edit_character,
     "Continue an Adventure": continue_adventure,
     "Start an Adventure": start_adventure,
-    "Start a random Battle": start_encounter,
+    "Start a random Battle": start_battle,
     "Exit": exit
 }
 
@@ -24,14 +24,6 @@ async function continue_adventure(player_char: characterFile){
 
 async function start_adventure(player_char: characterFile){
     console.log("\nStarting Adventure...\n")
-}
-
-async function start_encounter(player_char: characterFile) {
-    var randomEnemies: enemy_file[] = []
-    for (let i = 0; i < getRandomNumber(1,5); i++){
-        randomEnemies.push(create_enemy("Rat"))
-    }
-    start_battle(player_char, randomEnemies)
 }
 
 export default async function base_game_loop(){
