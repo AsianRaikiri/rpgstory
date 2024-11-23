@@ -48,7 +48,7 @@ export class BattleSimulacrum{
     public async MainLoop(){
         while (!this.fightOver()){
             UI.resetScreen()
-            UI.getBattleUi(this.player, this.enemyList)
+            console.log(UI.getBattleUi(this.player, this.enemyList))
             var activeCharacter = this.initiativeList[this.activeInitiative]
             if (activeCharacter == this.player){
                 var [action, target] = await UI.askForActionAndTarget(this.player, this.enemyList)
@@ -59,7 +59,7 @@ export class BattleSimulacrum{
 
             await this.applyAction(action, activeCharacter, target)
 
-            this.updateStats()
+            await this.updateStats()
 
             this.activeInitiative += 1
             if(this.activeInitiative == this.initiativeList.length){
@@ -102,7 +102,7 @@ export class BattleSimulacrum{
         })
     }
 
-    private updateStats(){
+    private async updateStats(){
         this.initiativeList.forEach(character => {
             if (character == this.player){
                 this.player = character

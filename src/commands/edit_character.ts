@@ -15,17 +15,17 @@ const commands: Record<string, Function> = {
 
 export function showStatblock(player: characterFile) {
     UI.resetScreen()
-    UI.getPlayerBaseStats(player)
+    console.log(UI.getPlayerBaseStats(player))
 }
 
 export function showAllStats(player: characterFile) {
     UI.resetScreen()
-    UI.getPlayerAllStats(player)
+    console.log(UI.getPlayerAllStats(player))
 }
 
 export function showAbilities(player: characterFile) {
     UI.resetScreen()
-    UI.getAbilities(player)
+    console.log(UI.getAbilities(player))
 }
 
 export default async function edit_character(player_char: characterFile){

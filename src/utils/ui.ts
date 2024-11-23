@@ -27,6 +27,7 @@ export class PlayerUI{
         this.addVoid()
         this.addPlayerStats(character)
         this.addBar()
+        return this.getUiString()
     }
 
     getPlayerBaseStats(character: characterFile){
@@ -34,6 +35,7 @@ export class PlayerUI{
         this.addVoid()
         this.addStatBlock(character)
         this.addBar()
+        return this.getUiString()
     }
 
     getAbilities(character: characterFile){
@@ -41,6 +43,7 @@ export class PlayerUI{
         this.addVoid()
         this.addAbilities(character)
         this.addBar()
+        return this.getUiString()
     }
 
     addVoid(){
