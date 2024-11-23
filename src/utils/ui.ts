@@ -1,6 +1,5 @@
 import UI from "cliui"
 import { ability, characterFile, enemy_file, fight_stats } from '../types';
-import { PlaceHolder } from "./placeholder"
 import Enquirer from "enquirer";
 
 export class PlayerUI{
