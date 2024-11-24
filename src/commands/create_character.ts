@@ -29,7 +29,8 @@ export default async function create_character() {
         {
             type: 'confirm',
             name: 'confirm',
-            message: `Are you sure you want to create this Character?`
+            message: `Are you sure you want to create this Character?`,
+            initial: true
         }
         ]
     )

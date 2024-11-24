@@ -8,6 +8,7 @@ import edit_character from "./edit_character";
 import { create_enemy } from "../content/enemies";
 import { getRandomNumber } from "../utils/math";
 import start_battle from "./start_battle";
+import { PlayerUI } from "../utils/ui";
 
 const commands: Record<string, any> = {
     "Edit Character Sheet": edit_character,
@@ -16,6 +17,7 @@ const commands: Record<string, any> = {
     "Start a random Battle": start_battle,
     "Exit": exit
 }
+const UI = new PlayerUI()
 
 
 async function continue_adventure(player_char: characterFile){
@@ -48,6 +50,7 @@ export default async function base_game_loop(){
     var keep_playing: boolean = true;
 
     while (keep_playing){
+        UI.resetScreen()
         answers = await enquirer.prompt([
             {
                 type: "select",

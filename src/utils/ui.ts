@@ -1,6 +1,7 @@
 import UI from "cliui"
 import { ability, characterFile, enemy_file, fight_stats } from '../types';
 import Enquirer from "enquirer";
+import { getFreeStats } from "../commands/edit_character";
 
 
 export const sleep = (ms = 2000) => new Promise( (r) => setTimeout( r, ms ) )
@@ -31,7 +32,6 @@ export class PlayerUI{
 
     getPlayerAllStats(character: characterFile){
         this.addBar()
-        this.addVoid()
         this.addPlayerStats(character)
         this.addBar()
         return this.getUiString()
@@ -39,7 +39,6 @@ export class PlayerUI{
 
     getPlayerBaseStats(character: characterFile){
         this.addBar()
-        this.addVoid()
         this.addStatBlock(character)
         this.addBar()
         return this.getUiString()
@@ -47,7 +46,6 @@ export class PlayerUI{
 
     getAbilities(character: characterFile){
         this.addBar()
-        this.addVoid()
         this.addAbilities(character)
         this.addBar()
         return this.getUiString()
@@ -135,7 +133,16 @@ export class PlayerUI{
 			{ text: `Stamina: ${character.statBlock.stamina} / ${character.statBlock.max_stamina}`, padding: [0,0,0,0], align: 'left' },
 		)
     }
+
+
     addStatBlock(character: characterFile){
+        var free_stats = getFreeStats(character)
+        this.ui.div(
+			{ text: `Total Stats: ${character.statBlock.total_stat_points}`, padding: [0,0,0,0], align: 'left' },
+            { text: `Free Stat Points: ${free_stats}`, padding: [0,0,0,0], align: 'left' }
+
+        )        
+        this.addBar
         this.ui.div(
 			{ text: `Strength: ${character.statBlock.base_stats.strength}`, padding: [0,0,0,0], align: 'left' }
         )

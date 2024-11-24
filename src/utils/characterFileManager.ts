@@ -51,10 +51,10 @@ export namespace CharacterSheetManager {
             statBlock: {
 				max_HP: 10,
 				HP: 10,
-				max_mana: 1,
-				mana: 1,
-				max_stamina: 1,
-				stamina: 1,
+				max_mana: 10,
+				mana: 10,
+				max_stamina: 10,
+				stamina: 10,
 				total_stat_points: 26,
 				base_stats:{
 					strength: 1,
