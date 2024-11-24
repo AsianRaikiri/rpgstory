@@ -39,7 +39,6 @@ export class BattleSimulacrum{
     }
 
     private sortTwo(next: number, last: number){
-        console.log("This is the thing" + typeof(this.initiativeList[next]))
         if(this.initiativeList[next].initiative > this.initiativeList[last].initiative){
             var tempHolder : fight_stats = this.initiativeList[last]
             this.initiativeList[last] = this.initiativeList[next]

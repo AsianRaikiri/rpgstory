@@ -128,8 +128,8 @@ async function changeBaseStats(player: characterFile) {
 }
 async function updateVariableStats(player: characterFile){
     player.statBlock.max_HP = player.statBlock.base_stats.constitution * 10
-    player.statBlock.max_mana = player.statBlock.base_stats.intelligence * 10
-    player.statBlock.max_stamina = player.statBlock.base_stats.dexterity + player.statBlock.base_stats.dexterity
+    player.statBlock.max_mana = player.statBlock.base_stats.intelligence + (player.statBlock.base_stats.wisdom *2)
+    player.statBlock.max_stamina = player.statBlock.base_stats.dexterity + player.statBlock.base_stats.strength
     return player
 }
 
