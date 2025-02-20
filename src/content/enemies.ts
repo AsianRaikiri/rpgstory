@@ -5,9 +5,9 @@ export const BASE_ENEMIES: Record<string, enemy_file> = {
     Rat: {
         name: "Rat",
         level: 1,
-        active_abilities: [ability_list.MAGIC_SHOT],
+        active_abilities: [ability_list.BITE, ability_list.CLAW, ability_list.SPLASH],
         statBlock: {
-            max_HP: 1,
+            max_HP: 5,
             HP: 1,
             max_mana: 1,
             mana: 0,

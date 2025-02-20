@@ -14,17 +14,17 @@ const BASE_CLASSES: Record<string, characterClass> = {
         name: "Cleric",
         level: 1, 
         description: "A cleric class",
-        base_abilities: [ability_list.FIREBALL],
-        secondary_abilities: [ability_list.MAGIC_SHOT],
-        tertary_abilities: [ability_list.EXPLOSION],
+        base_abilities: [ability_list.LIGHT_BALL],
+        secondary_abilities: [ability_list.GREAT_STORM],
+        tertary_abilities: [ability_list.DIVINE_INTERVENTION],
     },
     Warrior: {
         name: "Warrior",
         level: 1, 
         description: "A warrior class",
-        base_abilities: [ability_list.FIREBALL],
-        secondary_abilities: [ability_list.MAGIC_SHOT],
-        tertary_abilities: [ability_list.EXPLOSION],
+        base_abilities: [ability_list.SLASH],
+        secondary_abilities: [ability_list.BASH],
+        tertary_abilities: [ability_list.CLEAVE],
     }
 }
 

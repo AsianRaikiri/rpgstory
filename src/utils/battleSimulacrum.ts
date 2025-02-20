@@ -78,15 +78,31 @@ export class BattleSimulacrum{
     private async applyAction(action: ability, user: fight_stats, target: fight_stats){
         switch(action.cost_type){
             case "Health": {
+                if (user.HP < action.cost_amount){
+                    console.log(`> ${user.name} is trying to use ${action.name}, but nothing seems to happen`)
+                    await sleep()
+                    return 
+                }
                 user.HP = user.HP - action.cost_amount
                 break
             }
             case "Mana": {
+                if (user.mana < action.cost_amount){
+                    console.log(`> ${user.name} is trying to use ${action.name}, but nothing seems to happen`)
+                    await sleep()
+                    return 
+                }
                 user.mana = user.mana - action.cost_amount
                 break
             }
             case "Stamina": {
+                if (user.stamina < action.cost_amount){
+                    console.log(`> ${user.name} is trying to use ${action.name}, but nothing seems to happen`)
+                    await sleep()
+                    return 
+                }
                 user.stamina = user.stamina - action.cost_amount
+                break
             }
         }
         target.HP = target.HP - action.damage_amount
